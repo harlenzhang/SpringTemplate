@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.combo.mapper.CartMapper">
+    <resultMap id="BaseResultMap" type="com.tqmall.combo.model.Cart">
+        <id column="rec_id" property="recId" jdbcType="INTEGER"/>
+        <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
+        <result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+        <result column="activity_group_id" property="activityGroupId" jdbcType="INTEGER"/>
+        <result column="buy_now" property="buyNow" jdbcType="TINYINT"/>
+        <result column="activity_group_name" property="activityGroupName" jdbcType="VARCHAR"/>
+        <result column="del_type" property="delType" jdbcType="SMALLINT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="session_id" property="sessionId" jdbcType="CHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="supplier_id" property="supplierId" jdbcType="INTEGER"/>
+        <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR"/>
+        <result column="new_goods_sn" property="newGoodsSn" jdbcType="VARCHAR"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="goods_number" property="goodsNumber" jdbcType="INTEGER"/>
+        <result column="is_real" property="isReal" jdbcType="BIT"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="rec_type" property="recType" jdbcType="BIT"/>
+        <result column="is_gift" property="isGift" jdbcType="SMALLINT"/>
+        <result column="is_shipping" property="isShipping" jdbcType="BIT"/>
+        <result column="goods_attr_id" property="goodsAttrId" jdbcType="VARCHAR"/>
+        <result column="warehouse_id" property="warehouseId" jdbcType="INTEGER"/>
+        <result column="city_id" property="cityId" jdbcType="INTEGER"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="user_type" property="userType" jdbcType="TINYINT"/>
+        <result column="seller_id" property="sellerId" jdbcType="INTEGER"/>
+        <result column="seller_nick" property="sellerNick" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rec_id, activity_id, activity_name, activity_group_id, buy_now, activity_group_name,
+        del_type, user_id, session_id, goods_id, supplier_id, goods_sn, new_goods_sn, goods_name,
+        goods_number, is_real, parent_id, rec_type, is_gift, is_shipping, goods_attr_id,
+        warehouse_id, city_id,gmt_create,gmt_modified, user_type, seller_id, seller_nick, account_id
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart
+        where rec_id = #{recId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from db_cart
+        where rec_id = #{recId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertSelective"
+            parameterType="com.tqmall.combo.model.Cart"
+            useGeneratedKeys="true" keyColumn="rec_id" keyProperty="recId">
+        insert into db_cart
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recId != null">
+                rec_id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="activityName != null">
+                activity_name,
+            </if>
+            <if test="activityGroupId != null">
+                activity_group_id,
+            </if>
+            <if test="buyNow != null">
+                buy_now,
+            </if>
+            <if test="activityGroupName != null">
+                activity_group_name,
+            </if>
+            <if test="delType != null">
+                del_type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="sessionId != null">
+                session_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="supplierId != null">
+                supplier_id,
+            </if>
+            <if test="goodsSn != null">
+                goods_sn,
+            </if>
+            <if test="newGoodsSn != null">
+                new_goods_sn,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsNumber != null">
+                goods_number,
+            </if>
+            <if test="isReal != null">
+                is_real,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="recType != null">
+                rec_type,
+            </if>
+            <if test="isGift != null">
+                is_gift,
+            </if>
+            <if test="isShipping != null">
+                is_shipping,
+            </if>
+            <if test="goodsAttrId != null">
+                goods_attr_id,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="goodsAttr != null">
+                goods_attr,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="sellerId != null">
+                seller_id,
+            </if>
+            <if test="sellerNick != null">
+                seller_nick,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recId != null">
+                #{recId,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityName != null">
+                #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityGroupId != null">
+                #{activityGroupId,jdbcType=INTEGER},
+            </if>
+            <if test="buyNow != null">
+                #{buyNow,jdbcType=TINYINT},
+            </if>
+            <if test="activityGroupName != null">
+                #{activityGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="delType != null">
+                #{delType,jdbcType=SMALLINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="sessionId != null">
+                #{sessionId,jdbcType=CHAR},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="supplierId != null">
+                #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSn != null">
+                #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="newGoodsSn != null">
+                #{newGoodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNumber != null">
+                #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="isReal != null">
+                #{isReal,jdbcType=BIT},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="recType != null">
+                #{recType,jdbcType=BIT},
+            </if>
+            <if test="isGift != null">
+                #{isGift,jdbcType=SMALLINT},
+            </if>
+            <if test="isShipping != null">
+                #{isShipping,jdbcType=BIT},
+            </if>
+            <if test="goodsAttrId != null">
+                #{goodsAttrId,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsAttr != null">
+                #{goodsAttr,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userType != null">
+                #{userType, jdbcType=TINYINT},
+            </if>
+            <if test="sellerId != null">
+                #{sellerId,jdbcType=INTEGER},
+            </if>
+            <if test="sellerNick != null">
+                #{sellerNick,jdbcType=VARCHAR},
+            </if>
+            <if test="accountId != null">
+                #{accountId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.tqmall.combo.model.Cart">
+        update db_cart
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityName != null">
+                activity_name = #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityGroupId != null">
+                activity_group_id = #{activityGroupId,jdbcType=INTEGER},
+            </if>
+            <if test="buyNow != null">
+                buy_now = #{buyNow,jdbcType=TINYINT},
+            </if>
+            <if test="activityGroupName != null">
+                activity_group_name = #{activityGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="delType != null">
+                del_type = #{delType,jdbcType=SMALLINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="sessionId != null">
+                session_id = #{sessionId,jdbcType=CHAR},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="supplierId != null">
+                supplier_id = #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSn != null">
+                goods_sn = #{goodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="newGoodsSn != null">
+                new_goods_sn = #{newGoodsSn,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNumber != null">
+                goods_number = #{goodsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="isReal != null">
+                is_real = #{isReal,jdbcType=BIT},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="recType != null">
+                rec_type = #{recType,jdbcType=BIT},
+            </if>
+            <if test="isGift != null">
+                is_gift = #{isGift,jdbcType=SMALLINT},
+            </if>
+            <if test="isShipping != null">
+                is_shipping = #{isShipping,jdbcType=BIT},
+            </if>
+            <if test="goodsAttrId != null">
+                goods_attr_id = #{goodsAttrId,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsAttr != null">
+                goods_attr = #{goodsAttr,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,jdbcType=TINYINT},
+            </if>
+            <if test="sellerId != null">
+                seller_id = #{sellerId,jdbcType=INTEGER},
+            </if>
+            <if test="sellerNick != null">
+                seller_nick = #{sellerNick,jdbcType=VARCHAR},
+            </if>
+            <if test="accountId != null">
+                account_id = #{accountId},
+            </if>
+        </set>
+        where rec_id = #{recId,jdbcType=INTEGER}
+    </update>
+
+    <select id="getCartByParam"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where
+        <if test="goodsId != null">
+            goods_id=#{goodsId} and
+        </if>
+        <if test="uid != 0">
+            user_id=#{uid} and
+        </if>
+        <if test="uid == 0">
+            session_id=#{deviceId} and
+        </if>
+        <if test="buyNow != null">
+            buy_now=#{buyNow} and
+        </if>
+        <if test="activityId != null">
+            activity_id=#{activityId} and
+        </if>
+        <if test="activityGroupId != null">
+            activity_group_id=#{activityGroupId} and
+        </if>
+        <if test="userType != 0">
+            user_type=#{userType} and
+        </if>
+        city_id=#{cityId}
+    </select>
+
+    <select id="getKaCartByParam"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where
+        <if test="goodsId != null">
+            goods_id=#{goodsId} and
+        </if>
+        <if test="uid != 0">
+            user_id=#{uid} and
+        </if>
+        <if test="uid == 0">
+            session_id=#{deviceId} and
+        </if>
+        <if test="buyNow != null">
+            buy_now=#{buyNow} and
+        </if>
+        <if test="activityId != null">
+            activity_id=#{activityId} and
+        </if>
+        <if test="activityGroupId != null">
+            activity_group_id=#{activityGroupId} and
+        </if>
+        <if test="userType != 0">
+            user_type=#{userType} and
+        </if>
+        warehouse_id=#{warehouseId}
+    </select>
+
+    <select id="queryCartGoods"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where
+        <if test="uid != 0">
+            user_id=#{uid} and
+        </if>
+        <if test="uid == 0">
+            session_id=#{deviceId} and
+        </if>
+        <!--<if test="ids != null"-->
+        <if test="userType != 0">
+            user_type = #{userType, jdbcType=TINYINT} and
+        </if>
+        city_id = #{cityId} and buy_now = #{buyNow}
+        order by gmt_create desc
+    </select>
+
+    <select id="queryCartGoodsSortByCreateTime"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where
+        <if test="uid != 0">
+            user_id=#{uid} and
+        </if>
+        <if test="uid == 0">
+            session_id=#{deviceId} and
+        </if>
+        <if test="userType != 0">
+            user_type = #{userType, jdbcType=TINYINT} and
+        </if>
+        city_id = #{cityId} and buy_now = #{buyNow}
+        order by gmt_create desc
+    </select>
+
+    <select id="queryKaCartGoods" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where
+        user_id = #{uid} and warehouse_id = #{warehouseId} and user_type = #{userType} and buy_now = 0
+        order by gmt_create desc
+    </select>
+
+    <delete id="batchDeleteCartGoods">
+        delete from db_cart where rec_id in
+        <foreach item="item" index="index" collection="array"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="queryCartById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where rec_id in
+        <foreach item="cartIdList" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{cartIdList, jdbcType=INTEGER}
+        </foreach>
+    </select>
+
+    <select id="batchQueryCartByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where rec_id in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectByRecIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where rec_id in
+        <foreach item="recId" index="index" collection="recIds"
+                 open="(" separator="," close=")">
+            #{recId}
+        </foreach>
+    </select>
+    <select id="selectByRecIdsAndBuynow" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from db_cart where  buy_now = 3 and rec_id in
+        <foreach item="recId" index="index" collection="recIds"
+                 open="(" separator="," close=")">
+            #{recId}
+        </foreach>
+    </select>
+    <delete id="deleteBuyNowHistory">
+        delete from db_cart where
+        <if test="uid != 0">
+            user_id=#{uid} and
+        </if>
+        <if test="uid == 0">
+            session_id=#{deviceId} and
+        </if>
+        buy_now = 1
+    </delete>
+
+    <select id="getBuynowRecIds" resultType="java.lang.Integer">
+        SELECT
+          rec_id
+        FROM  db_cart
+        where
+          user_id=#{uid} and
+          city_id = #{cityId} and
+          buy_now = 1
+    </select>
+
+    <select id="getRecIdListByActIdAndGroupIdAndGoodsId" resultType="java.lang.Integer">
+        SELECT
+        rec_id
+        FROM  db_cart
+        where
+        <if test="uid > 0 ">
+            user_id=#{uid} and
+        </if>
+        <if test="uid == 0">
+            session_id = #{sessionId} and
+        </if>
+        city_id = #{cityId} and
+        activity_id = #{actId} AND
+        activity_group_id = #{actGroupId} AND
+    </select>
+    <delete id="deleteBuyNow">
+        DELETE FROM db_cart
+        where
+          user_id = #{uid} AND
+          buy_now = #{buynow} AND
+          activity_id in
+        <foreach item="actId" index="index" collection="actIds" open="(" separator="," close=")">
+            #{actId}
+        </foreach>
+    </delete>
+    <delete id="batchDeleteCartGood">
+        delete from db_cart where rec_id in
+        <foreach item="item" index="index" collection="recIds"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
